@@ -14,7 +14,8 @@ ENV CATALINA_HOME=/usr/local/tomcat
 COPY --from=build /build/target/simple-attendance.war /usr/local/tomcat/webapps/ROOT.war
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh
 
-RUN chmod +x /usr/local/bin/entrypoint.sh
+RUN sed -i 's/\r$//' /usr/local/bin/entrypoint.sh \
+    && chmod +x /usr/local/bin/entrypoint.sh
 
 EXPOSE 8080
 
